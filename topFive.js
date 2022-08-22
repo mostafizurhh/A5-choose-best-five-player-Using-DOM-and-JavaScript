@@ -45,6 +45,8 @@ document.getElementById('selectRenato').addEventListener('click', function () {
 })
 
 /*********************************** Bugget Part ********************************/
+
+/*-----------------*** Function For Converting InputField Value ***----------------*/
 function inputFieldValueConverter(fieldId) {
     const inputField = document.getElementById(fieldId);
     const fieldStringValue = inputField.value;
@@ -61,6 +63,8 @@ function inputFieldValueConverter(fieldId) {
     return fieldNumberValue;
 }
 
+/*---------------------*** Function For Players Cost ***-------------------------*/
+
 function playersCost() {
     const orderdList = document.getElementById('appendPlayers');
     const orderedListLength = orderdList.children.length;
@@ -72,9 +76,15 @@ function playersCost() {
     playersExpense.value = playersTotalExpense;
     return playersTotalExpense;
 }
+
+/*-----------------------*** Calculate Players Cost ***---------------------------*/
+
 document.getElementById('calculate').addEventListener('click', function () {
     playersCost();
 })
+
+/*-----------------------*** Calculate Total Cost ***----------------------------*/
+
 document.getElementById('calculateTotal').addEventListener('click', function () {
     const playersTotalExpense = playersCost();
     const expenseForManager = inputFieldValueConverter('manager');
