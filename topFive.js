@@ -51,24 +51,33 @@ function inputFieldValueConverter(fieldId) {
     const inputField = document.getElementById(fieldId);
     const fieldStringValue = inputField.value;
     const fieldNumberValue = parseFloat(fieldStringValue);
-    inputField.value = fieldNumberValue;
-    // if (isNaN(inputField)) {
-    //     inputField.value = '';
-    //     return alert('Please enter only number')
-    // }
-    // else if (inputField < 0) {
-    //     inputField.value = '';
-    //     return alert('Please enter only valid positive number')
-    // }
+    if (fieldNumberValue < 1) {
+        inputField.value = '';
+        return alert('1.Please enter only positive number')
+    }
+    else if (isNaN(fieldNumberValue)) {
+        inputField.value = '';
+        return alert('2.Please enter only number')
+    }
     return fieldNumberValue;
 }
 
 /*---------------------*** Function For Players Cost ***-------------------------*/
 
 function playersCost() {
+    // get length of selected players list //
     const orderdList = document.getElementById('appendPlayers');
     const orderedListLength = orderdList.children.length;
+
+    // get per player cost //
     const perPlayerCost = inputFieldValueConverter('perPlayerPrice');
+
+    //error handling//
+    if (isNaN(perPlayerCost)) {
+        return alert('3.Please enter only number')
+    }
+
+    // get players expenses //
     const playersExpense = document.getElementById('playersCost');
     const playersExpenseStringValue = playersExpense.value;
     const playersExpenseNumberValue = parseFloat(playersExpenseStringValue);
@@ -90,6 +99,11 @@ document.getElementById('calculateTotal').addEventListener('click', function () 
     const expenseForManager = inputFieldValueConverter('manager');
     const expenseForCoach = inputFieldValueConverter('coach');
     const totalCost = playersTotalExpense + expenseForManager + expenseForCoach;
+
+    //error handling//
+    if (isNaN(totalCost)) {
+        return alert('4.Please enter only number')
+    }
 
     const finalCost = document.getElementById('totalCost');
     finalCost.value = totalCost;
