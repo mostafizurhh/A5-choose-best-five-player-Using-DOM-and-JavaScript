@@ -43,3 +43,44 @@ document.getElementById('selectRenato').addEventListener('click', function () {
     appendChildren('renato');
     buttonDisabler('selectRenato');
 })
+
+/*********************************** Bugget Part ********************************/
+function inputFieldValueConverter(fieldId) {
+    const inputField = document.getElementById(fieldId);
+    const fieldStringValue = inputField.value;
+    const fieldNumberValue = parseFloat(fieldStringValue);
+    inputField.value = fieldNumberValue;
+    // if (isNaN(inputField)) {
+    //     inputField.value = '';
+    //     return alert('Please enter only number')
+    // }
+    // else if (inputField < 0) {
+    //     inputField.value = '';
+    //     return alert('Please enter only valid positive number')
+    // }
+    return fieldNumberValue;
+}
+
+function playersCost() {
+    const orderdList = document.getElementById('appendPlayers');
+    const orderedListLength = orderdList.children.length;
+    const perPlayerCost = inputFieldValueConverter('perPlayerPrice');
+    const playersExpense = document.getElementById('playersCost');
+    const playersExpenseStringValue = playersExpense.value;
+    const playersExpenseNumberValue = parseFloat(playersExpenseStringValue);
+    const playersTotalExpense = orderedListLength * perPlayerCost;
+    playersExpense.value = playersTotalExpense;
+    return playersTotalExpense;
+}
+document.getElementById('calculate').addEventListener('click', function () {
+    playersCost();
+})
+document.getElementById('calculateTotal').addEventListener('click', function () {
+    const playersTotalExpense = playersCost();
+    const expenseForManager = inputFieldValueConverter('manager');
+    const expenseForCoach = inputFieldValueConverter('coach');
+    const totalCost = playersTotalExpense + expenseForManager + expenseForCoach;
+
+    const finalCost = document.getElementById('totalCost');
+    finalCost.value = totalCost;
+})
